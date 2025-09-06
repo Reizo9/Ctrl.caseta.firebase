@@ -1,0 +1,350 @@
+/* Global CSS variables for a light, fresh palette */
+:root {
+  /* Material inspired palette */
+  --primary: #1976D2;            /* Material Blue 700 */
+  --primary-light: #42A5F5;      /* Material Blue 400 */
+  --danger: #E53935;             /* Material Red 600 */
+  --background: #F5F5F5;         /* Light grey background */
+  --card-bg: #FFFFFF;            /* White cards */
+  --text: #212121;               /* Dark text */
+  --border-radius: 10px;         /* Softer corners */
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Softer shadow */
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  /* Use a subtle diagonal gradient to make the page more eye‑catching */
+  background: linear-gradient(135deg, #E3F2FD, #E8F5E9);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Container for central alignment */
+.container {
+  padding: 1rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Grid layout for dashboard cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+/* Dashboard card styling */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.75rem 1.25rem;
+  box-shadow: var(--shadow);
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Add a colored accent bar at the top of each card */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--primary);
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.card i {
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+  /* Remove background and circle; rely on FontAwesome icons */
+  background: none;
+  display: inline-block;
+}
+
+.card span {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Generic button styling */
+.button {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  font-weight: 600;
+}
+
+.button:hover {
+  background: var(--primary-light);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.button.danger {
+  background: linear-gradient(135deg, var(--danger), #F44336);
+}
+
+/* Active state gives a subtle press effect */
+.button:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Inputs and selects */
+.input-group {
+  margin-bottom: 0.75rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #CBD5E0;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  box-sizing: border-box;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Focus styles for form inputs */
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+  outline: none;
+}
+
+/* Modal overlay and dialog */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.modal {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.75rem 1.5rem;
+  width: 92%;
+  max-width: 640px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow);
+  position: relative;
+  transform: translateY(-40px);
+  opacity: 0;
+  animation: slideDown 0.35s ease forwards;
+}
+
+.modal h2 {
+  margin-top: 0;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--primary);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+  color: var(--danger);
+}
+
+/* Emoji icons inside dashboard cards */
+.emoji-icon {
+  font-size: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+  background: rgba(25, 118, 210, 0.15);
+}
+
+/* Layout for backup actions (export/import) */
+.backup-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.backup-actions .button {
+  flex: 0 0 auto;
+}
+.backup-actions input[type="file"] {
+  flex: 1 1 auto;
+  min-width: 180px;
+}
+
+@media (max-width: 480px) {
+  .backup-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .backup-actions .button {
+    width: 100%;
+  }
+  .backup-actions input[type="file"] {
+    width: 100%;
+  }
+}
+
+/* Table styling */
+.table-container {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+th,
+td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #E2E8F0;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background: #F7F7F7;
+}
+
+th.sortable {
+  cursor: pointer;
+  user-select: none;
+  color: var(--primary);
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  background: var(--card-bg);
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+}
+
+.filter-bar input,
+.filter-bar select {
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #CBD5E0;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-bar input:focus,
+.filter-bar select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+  outline: none;
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 480px) {
+  /* Make modals and forms take the full width on very small devices */
+  .modal {
+    /* On very small devices, let the modal fill the available width. Use
+       a dynamic max‑height so that Safari/iOS calculates the usable
+       viewport height correctly and allow scrolling. The
+       -webkit-overflow-scrolling property enables momentum scroll on
+       iOS. */
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 0;
+    padding: 1rem;
+  }
+  .container {
+    padding: 0.5rem;
+  }
+  .input-group input,
+  .input-group select,
+  .input-group textarea {
+    font-size: 0.9rem;
+  }
+  .button {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.75rem;
+  }
+}
+
+/* Hide elements when not needed */
+.hidden {
+  display: none !important;
+}
+
+/* Fade and slide animations for modals */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-40px); }
+  to { opacity: 1; transform: translateY(0); }
+}

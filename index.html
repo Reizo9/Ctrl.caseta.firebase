@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control de Accesos</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-MW+0N9efXHlJtFoZ2JF2fbBHZ/i+Pt2c0eynp9cZxLyO6myMa3t9VBfQgQuo0q9nK4Jf2h4KS66Tl27blhG2Ng==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- App styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="root"></div>
+  <!-- React and ReactDOM UMD builds from CDN -->
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+  <!-- Firebase App (the core Firebase SDK) and Firestore -->
+  <!--
+    To enable Firestore replication for vehicle registrations, include
+    Firebase's core and Firestore libraries. Users must replace the
+    configuration object below with their own project details. If the
+    provided configuration retains the default placeholders the
+    Firebase SDK will be initialised with dummy values and the
+    replication layer will remain disabled. See
+    https://firebase.google.com/docs/web/learn-more#config-object for
+    instructions on obtaining a config object.
+  -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script>
+    // TODO: Replace the following with your app's Firebase project configuration
+    // The default values are placeholders that disable Firestore replication.
+    var firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+    if (firebaseConfig && firebaseConfig.projectId && firebaseConfig.projectId !== "YOUR_PROJECT_ID") {
+      try {
+        firebase.initializeApp(firebaseConfig);
+        window.firestore = firebase.firestore();
+      } catch (err) {
+        console.warn('No se pudo inicializar Firebase', err);
+      }
+    } else {
+      console.warn('Configuración de Firebase no proporcionada. La replicación a Firestore está desactivada.');
+    }
+  </script>
+  <!-- Application Code -->
+  <!-- Global error handlers to surface runtime issues. If any
+       uncaught error occurs or a promise is rejected without a
+       handler, display the error message to the user instead of
+       leaving the application stuck on the loading screen. -->
+  <script>
+    window.addEventListener('error', function (event) {
+      console.error('Error capturado:', event.error || event.message);
+      alert('Error en la aplicación: ' + (event.error && event.error.message ? event.error.message : event.message));
+    });
+    window.addEventListener('unhandledrejection', function (event) {
+      console.error('Rechazo no manejado:', event.reason);
+      alert('Error inesperado: ' + (event.reason && event.reason.message ? event.reason.message : event.reason));
+    });
+  </script>
+  <script defer src="app.js"></script>
+</body>
+</html>
